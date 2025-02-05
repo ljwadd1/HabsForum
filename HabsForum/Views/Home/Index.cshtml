@@ -1,0 +1,71 @@
+﻿@* @model List<HabsForum.Models.Discussion> *@
+@model IEnumerable<HabsForum.Models.Discussion>
+
+@{
+    ViewData["Title"] = "Habs Forum Home Page";
+}
+
+<div class="home-header">
+    <h1>Habs Forum</h1>
+    <p>Welcome to the Habs Forum!</p>
+</div>
+
+<div class="home-content">
+    @* @foreach (var item in Model) *@
+    @* { *@
+    @*     string imageUrl = Url.Content("/photos/" + item.ImageFilename); *@
+
+        <div class="content-grid">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ImageFile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Comments)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreateDate)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        string imageUrl = Url.Content("/photos/" + item.ImageFilename);
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("HabsForum", "Home", new { id = item.DiscussionId })"> 
+                                    <img src="@imageUrl" class="home-image" alt="@item.Content" />
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comments.Count)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDate)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.DiscussionId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.DiscussionId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.DiscussionId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @* This just displays the image associated with the discussion (if one was uploaded) - just here for reference
+            <a href="@Url.Action("HabsForum", "Home", new { id = item.DiscussionId })"> *@
+            @*     <img src="@imageUrl" class="home-image" alt="@item.Content" /> *@
+            @* </a> *@
+        </div>
+</div>
