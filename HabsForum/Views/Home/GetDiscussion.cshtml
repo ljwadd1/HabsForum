@@ -1,37 +1,47 @@
-﻿@* @model HabsForum.Models.Discussion *@
-@model IEnumerable<HabsForum.Models.Discussion>
+﻿@model HabsForum.Models.Discussion
 
 
 @{
-    // Change the title to the name of discussion later?
     ViewData["Title"] = "Discussion Thread";
+    var item = Model;
+    string imageUrl = Url.Content("/photos/" + item.ImageFilename);
 }
 
-@* Don't think I want to keep the below code, but not ready to delete yet *@
-@* <table class="table"> *@
-@*     <tr> *@
-@*         <td> *@
-@*             @Html.DisplayNameFor(model => model.DiscussionId) *@
-@*         </td> *@
-@*         <td> *@
-@*             @Html.DisplayFor(model => model.DiscussionId) *@
-@*         </td> *@
-@*     </tr> *@
-@*     <tr> *@
-@*         <td> *@
-@*             @Html.DisplayNameFor(model => model.CreateDate) *@
+<div class="container card">
+    <div class="row justify-content-md-center">
+        <div class="col text-center">
+            <h1 class="mb-4 mt-4">@Html.DisplayFor(modelItem => item.Title)</h1>
 
-@*         </td> *@
-@*         <td> *@
-@*             @Html.DisplayFor(model => model.CreateDate) *@
-@*         </td> *@
-@*     </tr> *@
-@*     <tr> *@
-@*         <td> *@
-@*             @Html.DisplayNameFor(model => model.ImageFilename) *@
-@*         </td> *@
-@*         <td> *@
-@*             @Html.DisplayFor(model => model.ImageFilename) *@
-@*         </td> *@
-@*     </tr> *@
-@* </table> *@
+            <div class="discussion-image-header">
+                <img src="@imageUrl" class="discussion-image" alt="No Image" />
+            </div>
+
+            <p class="mt-4">@Html.DisplayFor(model => model.Content)</p>
+
+        </div>
+    </div>
+    </div>
+
+<div class="row">
+    <a asp-action="Create" asp-controller="Comments" asp-route-id="@Model.DiscussionId">Add Comment</a>
+    <a asp-action="Index">Back to List</a>
+
+    <div class="comment-container d-flex content-grid">
+        @if (Model.Comments != null)
+        {
+            foreach (var comment in Model.Comments)
+            {
+                <div class="comment card mb-sm-3 container row">
+                    <div class="col">
+                        @Html.DisplayFor(modelItem => comment.Content)
+                    </div>
+                    <div class="col">
+                        Posted: @Html.DisplayFor(modelItem => comment.CreateDate)
+                    </div>
+                </div>
+            }
+        } else {
+            <p>No Comments.</p>
+        }
+    </div>
+</div>

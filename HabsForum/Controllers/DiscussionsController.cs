@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HabsForum.Data;
+﻿using HabsForum.Data;
 using HabsForum.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HabsForum.Controllers
 {
@@ -22,6 +17,7 @@ namespace HabsForum.Controllers
         // GET: Discussions
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.Discussion.ToListAsync());
         }
 
@@ -34,6 +30,7 @@ namespace HabsForum.Controllers
             }
 
             var discussion = await _context.Discussion
+                .Include("Comments")
                 .FirstOrDefaultAsync(m => m.DiscussionId == id);
 
             if (discussion == null)
@@ -57,13 +54,22 @@ namespace HabsForum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DiscussionId,Title,Content,ImageFile,CreateDate")] Discussion discussion)
         {
-            // rename uploaded file to guid
-            discussion.ImageFilename = Guid.NewGuid().ToString() + Path.GetExtension(discussion.ImageFile?.FileName);
+            // rename uploaded file to guid if image uploaded
+            if (discussion.ImageFile != null)
+            {
+                discussion.ImageFilename = Guid.NewGuid().ToString() + Path.GetExtension(discussion.ImageFile?.FileName);
+            } else
+            {
+                // set image to a default image if no image uploaded
+                discussion.ImageFilename = "mc-logo.jpg";
+            }
 
             if (ModelState.IsValid)
             {
                 _context.Add(discussion);
                 await _context.SaveChangesAsync();
+
+
 
                 // Save uploaded file after photo is saved in db
                 if (discussion.ImageFile != null)

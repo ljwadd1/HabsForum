@@ -1,5 +1,4 @@
-﻿@* @model List<HabsForum.Models.Discussion> *@
-@model IEnumerable<HabsForum.Models.Discussion>
+﻿@model IEnumerable<HabsForum.Models.Discussion>
 
 @{
     ViewData["Title"] = "Habs Forum Home Page";
@@ -11,61 +10,31 @@
 </div>
 
 <div class="home-content">
-    @* @foreach (var item in Model) *@
-    @* { *@
-    @*     string imageUrl = Url.Content("/photos/" + item.ImageFilename); *@
+    <div class="add-discussion-container container">
+        <a asp-controller="Discussions" asp-action="Create" >Create New Discussion</a>
+    </div>
 
-        <div class="content-grid">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ImageFile)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Title)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Comments)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CreateDate)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        string imageUrl = Url.Content("/photos/" + item.ImageFilename);
-                        <tr>
-                            <td>
-                                <a href="@Url.Action("HabsForum", "Home", new { id = item.DiscussionId })"> 
-                                    <img src="@imageUrl" class="home-image" alt="@item.Content" />
-                                </a>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Comments.Count)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CreateDate)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.DiscussionId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.DiscussionId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.DiscussionId">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    <div class="content-grid d-flex">
 
-            @* This just displays the image associated with the discussion (if one was uploaded) - just here for reference
-            <a href="@Url.Action("HabsForum", "Home", new { id = item.DiscussionId })"> *@
-            @*     <img src="@imageUrl" class="home-image" alt="@item.Content" /> *@
-            @* </a> *@
+        @foreach (var item in Model)
+        {
+            string imageUrl = Url.Content("/photos/" + item.ImageFilename);
+
+            <div class="discussion-card card mb-sm-3 container row">
+                <div class="col discussion-image-container d-flex align-content-center justify-content-center">
+                    <img src="@imageUrl" class="discussion-thumbnail card-img" alt="No Image" />
+                </div>
+                <div class="col card-body discussion-body">
+                    <div class="row">
+                        <h2><a asp-action="GetDiscussion" asp-route-id="@item.DiscussionId" class="card-title">@Html.DisplayFor(modelItem => item.Title)</a></h2>
+                    </div>
+                    <div class="row discussion-card-details mt-4">
+                        <p class="card-text">Comments: @item.Comments.Count</p>
+                        <p class="card-text">Created: @Html.DisplayFor(modelItem => item.CreateDate)</p>
+                    </div>
+                </div>
+            </div>
+        }
+
         </div>
 </div>

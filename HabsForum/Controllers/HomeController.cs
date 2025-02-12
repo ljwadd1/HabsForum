@@ -1,8 +1,6 @@
-using System.Diagnostics;
-using HabsForum.Models;
+using HabsForum.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HabsForum.Data;
 
 namespace HabsForum.Controllers
 {
@@ -16,11 +14,12 @@ namespace HabsForum.Controllers
             _context = context;
         }
 
-        // Home: All photos
+        // Home: All discussions
         public async Task <IActionResult> Index()
         {
             // get list of all discussions from db
-            var discussions = await _context.Discussion.ToListAsync();
+            var discussions = await _context.Discussion.Include("Comments")
+                .ToListAsync();
 
             // pass discussions to view
             return View(discussions);
@@ -35,7 +34,8 @@ namespace HabsForum.Controllers
             }
 
             // get discussion by id
-            var discussion = await _context.Discussion.FirstOrDefaultAsync(m => m.DiscussionId == id);
+            var discussion = await _context.Discussion.Include("Comments")
+                .FirstOrDefaultAsync(m => m.DiscussionId == id);
 
             if (discussion == null)
             {

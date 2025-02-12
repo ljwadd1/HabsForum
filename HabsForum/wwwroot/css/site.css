@@ -29,3 +29,50 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.discussion-image-container {
+    height: 100%;
+    width: 30vw;
+    overflow: clip;
+    background: red;
+    margin: 0;
+    padding: 0;
+}
+
+.discussion-thumbnail {
+    width: auto;
+    height: auto;
+}
+
+.discussion-card {
+    height: 20vh;
+    max-height: 300px;
+    width: auto;
+}
+
+.discussion-body {
+    height: 100%;
+}
+
+.card-text {
+    justify-content: end;
+}
+
+.discussion-image {
+    height: 100%;
+}
+
+.discussion-image-header {
+    background: blue;
+    margin: 0;
+    padding: 0;
+    height: 30vh;
+}
+
+.content-grid {
+    flex-direction: column-reverse;
+}
+
+.comment {
+    flex-direction: column-reverse;
+}
