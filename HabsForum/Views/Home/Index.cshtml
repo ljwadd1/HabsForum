@@ -25,7 +25,7 @@
                     <img src="@imageUrl" class="discussion-thumbnail card-img" alt="No Image" />
                 </div>
                 <div class="col card-body discussion-body">
-                    <div class="row">
+                    <div class="row disc-title">
                         <h2><a asp-action="GetDiscussion" asp-route-id="@item.DiscussionId" class="card-title">@Html.DisplayFor(modelItem => item.Title)</a></h2>
                     </div>
                     <div class="row discussion-card-details mt-4">

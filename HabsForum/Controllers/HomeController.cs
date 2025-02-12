@@ -45,10 +45,6 @@ namespace HabsForum.Controllers
             return View(discussion);
         }
 
-        // probably delete Privacy page
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
     }
 }
