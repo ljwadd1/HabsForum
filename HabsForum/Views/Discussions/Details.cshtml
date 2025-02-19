@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    string imageUrl = Url.Content("/photos/" + Model.ImageFilename);
 }
 
 <h1>Details</h1>
@@ -27,6 +28,9 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ImageFilename)
+            <div class="image-detail-container">
+                <img src="@imageUrl" class="image-detail-thumbnail" alt="No Image" />
+            </div>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CreateDate)

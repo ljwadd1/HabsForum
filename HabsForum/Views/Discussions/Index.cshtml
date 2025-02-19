@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<HabsForum.Models.Discussion>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -16,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Content)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageFilename)
+                @Html.DisplayNameFor(model => model.ImageFile)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreateDate)
@@ -24,27 +25,41 @@
             <th></th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model) {
+            string imageUrl = Url.Content("/photos/" + item.ImageFilename);
+            
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                <div class="discussion-index-content">
+                    @Html.DisplayFor(modelItem => item.Content)
+                </div>
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ImageFilename)
+                <div>
+                        <img src="@imageUrl" class="image-detail-thumbnail" alt="No Image" />
+                </div>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DiscussionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DiscussionId">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.DiscussionId">Edit</a>
+                <br />
+                <a asp-action="Details" asp-route-id="@item.DiscussionId">Details</a>
+                <br />
                 <a asp-action="Delete" asp-route-id="@item.DiscussionId">Delete</a>
             </td>
         </tr>
-}
+            
+        }
+        
     </tbody>
+    
 </table>

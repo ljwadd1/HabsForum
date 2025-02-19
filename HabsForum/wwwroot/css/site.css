@@ -1,5 +1,10 @@
 html {
   font-size: 14px;
+  
+}
+
+a {
+    color: white;
 }
 
 @media (min-width: 768px) {
@@ -15,10 +20,12 @@ html {
 html {
   position: relative;
   min-height: 100%;
+
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    color: white;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -34,7 +41,7 @@ body {
     height: 100%;
     width: 30%;
     overflow: clip;
-    background: red;
+    background: grey;
     margin: 0;
     padding: 0;
 }
@@ -61,6 +68,7 @@ body {
 
 .discussion-image {
     height: 100%;
+    box-sizing: border-box;
 }
 
 .discussion-image-header {
@@ -68,6 +76,7 @@ body {
     margin: 0;
     padding: 0;
     height: 30vh;
+    overflow: auto;
 }
 
 .content-grid {
@@ -81,4 +90,33 @@ body {
 .disc-title {
     width: 100%;
     text-overflow: ellipsis;
+}
+
+.image-detail-thumbnail {
+    width: 100%;
+    height: auto;
+}
+.image-detail-container {
+    width: 50vw;
+    height: auto;
+}
+
+.discussion-index-content {
+    height: 30vh;
+    overflow: scroll;
+}
+
+.habs-red {
+    background: #AF1E2D;
+    color: white;
+}
+
+.habs-blue {
+    background: #192168;
+    color: white;
+}
+
+.hover-red:hover {
+    color: #AF1E2D;
+    font-weight: 700;
 }

@@ -1,18 +1,15 @@
 ﻿@model IEnumerable<HabsForum.Models.Discussion>
 
 @{
-    ViewData["Title"] = "Habs Forum Home Page";
+    ViewData["Title"] = "Habs Forum";
 }
-
 <div class="home-header">
-    <h1>Habs Forum</h1>
+    <h1 class="fw-bold">Habs Forum</h1>
     <p>Welcome to the Habs Forum!</p>
 </div>
 
 <div class="home-content">
-    <div class="add-discussion-container container">
-        <a asp-controller="Discussions" asp-action="Create" >Create New Discussion</a>
-    </div>
+    <a asp-controller="Discussions" asp-action="Create" class="btn btn-primary mb-3 ml-0">Create New Discussion</a>
 
     <div class="content-grid d-flex">
 
@@ -36,5 +33,5 @@
             </div>
         }
 
-        </div>
+    </div>
 </div>

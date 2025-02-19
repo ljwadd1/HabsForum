@@ -20,13 +20,14 @@
 
         </div>
     </div>
+
+    <a class="btn btn-primary mb-2" asp-action="Create" asp-controller="Comments" asp-route-id="@Model.DiscussionId">Add Comment</a>
+    <a class="btn btn-primary mb-2" asp-action="Index">Back to List</a>
     </div>
 
-<div class="row">
-    <a asp-action="Create" asp-controller="Comments" asp-route-id="@Model.DiscussionId">Add Comment</a>
-    <a asp-action="Index">Back to List</a>
-
-    <div class="comment-container d-flex content-grid">
+<div class="row mt-4">
+    
+    <div class="comment-container d-flex content-grid p-0">
         @if (Model.Comments != null)
         {
             foreach (var comment in Model.Comments)
