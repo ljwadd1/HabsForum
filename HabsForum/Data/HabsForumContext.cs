@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using HabsForum.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HabsForum.Data
 {
-    public class HabsForumContext : DbContext
+    public class HabsForumContext : IdentityDbContext<ApplicationUser>
     {
         public HabsForumContext (DbContextOptions<HabsForumContext> options)
             : base(options)

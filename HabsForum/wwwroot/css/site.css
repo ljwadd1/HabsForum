@@ -83,9 +83,13 @@ body {
     flex-direction: column-reverse;
 }
 
-.comment {
-    flex-direction: column-reverse;
+.comment-grid {
+    flex-direction: column;
 }
+
+/*.comment {
+    flex-direction: column-reverse;
+}*/
 
 .disc-title {
     width: 100%;
@@ -119,4 +123,10 @@ body {
 .hover-red:hover {
     color: #AF1E2D;
     font-weight: 700;
+}
+
+.nav-logo {
+    height: 50px;
+    width: auto;
+    padding: 0px 20px 0px 5px;
 }

@@ -21,18 +21,18 @@
         </div>
     </div>
 
-    <a class="btn btn-primary mb-2" asp-action="Create" asp-controller="Comments" asp-route-id="@Model.DiscussionId">Add Comment</a>
     <a class="btn btn-primary mb-2" asp-action="Index">Back to List</a>
     </div>
 
 <div class="row mt-4">
     
-    <div class="comment-container d-flex content-grid p-0">
+    <div class="comment-container d-flex comment-grid">
+        <h3>Comments</h3>
         @if (Model.Comments != null)
         {
             foreach (var comment in Model.Comments)
             {
-                <div class="comment card mb-sm-3 container row">
+                <div class="comment card mb-sm-3 container">
                     <div class="col">
                         @Html.DisplayFor(modelItem => comment.Content)
                     </div>
@@ -44,5 +44,9 @@
         } else {
             <p>No Comments.</p>
         }
+
+        <a class="btn btn-primary mb-2" asp-action="Create" asp-controller="Comments" asp-route-id="@Model.DiscussionId">Add Comment</a>
+
     </div>
+
 </div>

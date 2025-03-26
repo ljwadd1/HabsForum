@@ -1,5 +1,6 @@
 ﻿using HabsForum.Data;
 using HabsForum.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ namespace HabsForum.Controllers
         }
 
         // GET: Discussions
+        [Authorize]
         public async Task<IActionResult> Index()
         {
 
@@ -22,6 +24,7 @@ namespace HabsForum.Controllers
         }
 
         // GET: Discussions/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
